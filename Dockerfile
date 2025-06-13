@@ -4,20 +4,21 @@ FROM mcr.microsoft.com/playwright:v1.40.0-focal
 # Set working directory
 WORKDIR /app
 
-# Copy package files
+# Copy package files and Prisma schema first
 COPY package*.json ./
 COPY pnpm-lock.yaml ./
+COPY prisma ./prisma/
 
 # Install pnpm
 RUN npm install -g pnpm
 
-# Install dependencies
+# Install dependencies (this will run postinstall and generate Prisma client)
 RUN pnpm install --frozen-lockfile
 
-# Copy source code
+# Copy rest of source code
 COPY . .
 
-# Generate Prisma client
+# Generate Prisma client (ensure it's generated with full source)
 RUN pnpm prisma generate
 
 # Install Playwright browsers
