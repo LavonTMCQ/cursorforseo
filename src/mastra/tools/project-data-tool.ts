@@ -187,7 +187,7 @@ function calculateAverageRanking(keywords: any[]): number {
 }
 
 function generateProjectInsights(projects: any[]): string[] {
-  const insights = [];
+  const insights: string[] = [];
   
   if (projects.length === 0) {
     insights.push("No projects found. Consider creating your first SEO project to start tracking keywords and rankings.");
@@ -208,7 +208,7 @@ function generateProjectInsights(projects: any[]): string[] {
 }
 
 function generateSingleProjectInsights(project: any): string[] {
-  const insights = [];
+  const insights: string[] = [];
   
   if (!project) {
     insights.push("Project not found.");
@@ -243,7 +243,7 @@ function generateSingleProjectInsights(project: any): string[] {
 }
 
 function generateKeywordInsights(keywords: any[]): string[] {
-  const insights = [];
+  const insights: string[] = [];
   
   if (keywords.length === 0) {
     insights.push("No keywords found. Start by adding target keywords to track their performance.");
@@ -267,7 +267,7 @@ function generateKeywordInsights(keywords: any[]): string[] {
 }
 
 function generateRankingInsights(rankings: any[]): string[] {
-  const insights = [];
+  const insights: string[] = [];
   
   if (rankings.length === 0) {
     insights.push("No ranking data available.");
@@ -286,7 +286,7 @@ function generateRankingInsights(rankings: any[]): string[] {
 }
 
 function generateAuditInsights(audits: any[]): string[] {
-  const insights = [];
+  const insights: string[] = [];
   
   if (audits.length === 0) {
     insights.push("No audit data available. Consider running SEO audits to identify optimization opportunities.");

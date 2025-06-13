@@ -110,7 +110,12 @@ async function analyzeContent(
   else if (descriptionLength > 0) seoScore += 8;
   
   // Generate recommendations
-  const recommendations = [];
+  const recommendations: Array<{
+    type: "critical" | "important" | "suggestion";
+    category: "keyword" | "meta" | "content" | "structure";
+    message: string;
+    impact: "high" | "medium" | "low";
+  }> = [];
   
   if (keywordDensity < 1) {
     recommendations.push({

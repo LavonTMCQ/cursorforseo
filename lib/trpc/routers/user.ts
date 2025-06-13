@@ -6,7 +6,7 @@ export const userRouter = router({
   getProfile: protectedProcedure.query(async ({ ctx }) => {
     const user = await ctx.prisma.user.findUnique({
       where: {
-        id: ctx.session.user.id,
+        id: (ctx.session as any)?.user?.id,
       },
       include: {
         projects: {
@@ -37,7 +37,7 @@ export const userRouter = router({
     .mutation(async ({ ctx, input }) => {
       const user = await ctx.prisma.user.update({
         where: {
-          id: ctx.session.user.id,
+          id: (ctx.session as any)?.user?.id,
         },
         data: {
           ...(input.name && { name: input.name }),
@@ -52,17 +52,17 @@ export const userRouter = router({
   getStats: protectedProcedure.query(async ({ ctx }) => {
     const [projectCount, keywordCount, totalRankings] = await Promise.all([
       ctx.prisma.project.count({
-        where: { userId: ctx.session.user.id },
+        where: { userId: (ctx.session as any)?.user?.id },
       }),
       ctx.prisma.keyword.count({
         where: {
-          project: { userId: ctx.session.user.id },
+          project: { userId: (ctx.session as any)?.user?.id },
         },
       }),
       ctx.prisma.ranking.count({
         where: {
           keyword: {
-            project: { userId: ctx.session.user.id },
+            project: { userId: (ctx.session as any)?.user?.id },
           },
         },
       }),
@@ -72,7 +72,7 @@ export const userRouter = router({
     const rankings = await ctx.prisma.ranking.findMany({
       where: {
         keyword: {
-          project: { userId: ctx.session.user.id },
+          project: { userId: (ctx.session as any)?.user?.id },
         },
       },
       select: {

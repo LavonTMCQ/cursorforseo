@@ -6,7 +6,7 @@ export const projectRouter = router({
   getAll: protectedProcedure.query(async ({ ctx }) => {
     const projects = await ctx.prisma.project.findMany({
       where: {
-        userId: ctx.session.user.id,
+        userId: (ctx.session as any)?.user?.id,
       },
       include: {
         _count: {
@@ -57,7 +57,7 @@ export const projectRouter = router({
       const project = await ctx.prisma.project.findFirst({
         where: {
           id: input.id,
-          userId: ctx.session.user.id,
+          userId: (ctx.session as any)?.user?.id,
         },
         include: {
           keywords: {
@@ -109,7 +109,7 @@ export const projectRouter = router({
         data: {
           name: input.name,
           domain: input.domain,
-          userId: ctx.session.user.id,
+          userId: (ctx.session as any)?.user?.id,
           settings: input.settings || {},
         },
       })
@@ -131,7 +131,7 @@ export const projectRouter = router({
       const project = await ctx.prisma.project.updateMany({
         where: {
           id: input.id,
-          userId: ctx.session.user.id,
+          userId: (ctx.session as any)?.user?.id,
         },
         data: {
           ...(input.name && { name: input.name }),
@@ -154,7 +154,7 @@ export const projectRouter = router({
       const project = await ctx.prisma.project.deleteMany({
         where: {
           id: input.id,
-          userId: ctx.session.user.id,
+          userId: (ctx.session as any)?.user?.id,
         },
       })
 

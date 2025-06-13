@@ -5,7 +5,7 @@ import cors from 'cors'
 import { browserAutomation } from '../browser-automation'
 import { openaiService } from '../openai-service'
 
-const port = process.env.PORT || process.env.WEBSOCKET_PORT || 3001
+const port = Number(process.env.PORT) || Number(process.env.WEBSOCKET_PORT) || 3001
 const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(',') || [
   'http://localhost:3000',
   'https://localhost:3000'

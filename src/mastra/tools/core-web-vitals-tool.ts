@@ -185,7 +185,7 @@ async function analyzeCoreWebVitals(
 }
 
 function generateLCPRecommendations(lcpValue: number): string[] {
-  const recommendations = [];
+  const recommendations: string[] = [];
   
   if (lcpValue > 2.5) {
     recommendations.push("Optimize server response times by upgrading hosting or implementing caching");
@@ -204,7 +204,7 @@ function generateLCPRecommendations(lcpValue: number): string[] {
 }
 
 function generateFIDRecommendations(fidValue: number): string[] {
-  const recommendations = [];
+  const recommendations: string[] = [];
   
   if (fidValue > 100) {
     recommendations.push("Break up long-running JavaScript tasks");
@@ -223,7 +223,7 @@ function generateFIDRecommendations(fidValue: number): string[] {
 }
 
 function generateCLSRecommendations(clsValue: number): string[] {
-  const recommendations = [];
+  const recommendations: string[] = [];
   
   if (clsValue > 0.1) {
     recommendations.push("Set explicit dimensions for images and video elements");
@@ -242,7 +242,7 @@ function generateCLSRecommendations(clsValue: number): string[] {
 }
 
 function generateINPRecommendations(inpValue: number): string[] {
-  const recommendations = [];
+  const recommendations: string[] = [];
   
   if (inpValue > 200) {
     recommendations.push("Optimize event handlers to reduce processing time");

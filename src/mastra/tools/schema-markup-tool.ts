@@ -109,7 +109,11 @@ function generateSchemaErrors(hasSchema: boolean) {
     ];
   }
 
-  const errors = [];
+  const errors: Array<{
+    type: string;
+    message: string;
+    severity: "error" | "warning";
+  }> = [];
   if (Math.random() > 0.7) {
     errors.push({
       type: "invalid-property",
@@ -130,7 +134,13 @@ function generateSchemaErrors(hasSchema: boolean) {
 }
 
 function generateRecommendedSchema(contentType: string, businessInfo?: any) {
-  const schemas = [];
+  const schemas: Array<{
+    type: string;
+    priority: "high" | "medium" | "low";
+    jsonLd: string;
+    benefits: string[];
+    implementation: string;
+  }> = [];
 
   // Always recommend basic schemas
   schemas.push({

@@ -180,19 +180,7 @@ class BrowserAutomationService {
     }
   }
 
-  async fillForm(sessionId: string, selector: string, value: string): Promise<void> {
-    const session = await this.getSession(sessionId);
-    if (!session) {
-      throw new Error('Session not found');
-    }
 
-    try {
-      await session.page.fill(selector, value);
-    } catch (error) {
-      console.error(`Form fill error [${sessionId}]:`, error);
-      throw new Error(`Failed to fill form: ${error}`);
-    }
-  }
 
   async analyzeSEO(sessionId: string): Promise<SEOAnalysis> {
     const session = await this.getSession(sessionId);
@@ -427,12 +415,12 @@ class BrowserAutomationService {
 
   private cleanupInactiveSessions(): void {
     const now = new Date();
-    for (const [sessionId, session] of this.sessions.entries()) {
+    this.sessions.forEach((session, sessionId) => {
       if (now.getTime() - session.lastActivity.getTime() > this.sessionTimeout) {
         console.log(`Cleaning up inactive session: ${sessionId}`);
         this.closeSession(sessionId);
       }
-    }
+    });
   }
 
   async cleanup(): Promise<void> {

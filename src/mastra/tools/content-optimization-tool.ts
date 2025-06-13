@@ -189,7 +189,13 @@ function generateSemanticKeywords(targetKeyword: string): string[] {
 }
 
 function generateSEOImprovements(content: string, targetKeyword: string, currentDensity: number) {
-  const improvements = [];
+  const improvements: Array<{
+    type: "keyword-density" | "structure" | "readability" | "meta" | "links";
+    current: string;
+    suggested: string;
+    impact: "high" | "medium" | "low";
+    reasoning: string;
+  }> = [];
   
   if (currentDensity < 1) {
     improvements.push({
@@ -212,7 +218,7 @@ function generateSEOImprovements(content: string, targetKeyword: string, current
   }
   
   improvements.push({
-    type: "structure" as const,
+    type: "readability" as const,
     current: "Basic paragraph structure",
     suggested: "Add bullet points, numbered lists, and subheadings",
     impact: "medium" as const,
