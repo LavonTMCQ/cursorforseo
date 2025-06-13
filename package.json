@@ -4,14 +4,15 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "next start",
     "lint": "next lint",
     "mastra:dev": "mastra dev",
     "websocket": "tsx scripts/start-websocket.ts",
     "websocket:prod": "NODE_ENV=production tsx scripts/start-websocket.ts",
     "deploy:backend": "railway up",
-    "deploy:frontend": "vercel --prod"
+    "deploy:frontend": "vercel --prod",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@ai-sdk/openai": "^1.3.22",
