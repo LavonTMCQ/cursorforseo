@@ -27,6 +27,9 @@ RUN pnpm exec playwright install chromium
 # Build the application
 RUN pnpm build
 
+# Deploy database schema (if DATABASE_URL is available)
+RUN if [ -n "$DATABASE_URL" ]; then pnpm db:push; fi
+
 # Expose the WebSocket port
 EXPOSE 3001
 
