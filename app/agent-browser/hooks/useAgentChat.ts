@@ -29,9 +29,12 @@ export function useAgentChat(socket: Socket | null) {
         status: 'sent'
       }
       
-      setMessages(prev => prev.map(msg => 
-        msg.status === 'sending' ? { ...msg, status: 'sent' } : msg
-      ).concat(newMessage))
+      setMessages(prev => [
+        ...prev.map(msg =>
+          msg.status === 'sending' ? { ...msg, status: 'sent' as const } : msg
+        ),
+        newMessage
+      ])
       setIsAgentTyping(false)
     })
 
